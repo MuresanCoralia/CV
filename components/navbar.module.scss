@@ -1,0 +1,54 @@
+@use '../styles/variables' as *;
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(to right, $navy 0%, $blue 70%);
+  height: 50px;
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    span {
+      color: $beige;
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+  }
+
+  .navItems {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
+
+  .navItems li {
+    height: 100%;
+  }
+
+  .navItems li a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 100%;
+    width: 110px;
+    padding: 0 1rem;
+
+    color: $beige;
+    text-decoration: none;
+    font-weight: 600;
+
+    transition: background-color 0.2s ease;
+  }
+
+  .navItems li a:hover,
+  .navItems li a.active {
+    background-color: $magenta;
+  }
+}
