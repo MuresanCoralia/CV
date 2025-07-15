@@ -1,37 +1,65 @@
 @use '../styles/variables' as *;
 
-.imageContainer {
+.overlayContent {
   position: relative;
-  height: 65vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 2rem;
-  margin-top: 2rem;
+  padding: 2rem;
+  width: 100%;
+  text-align: left;
+  line-height: 1.7;
+  font-weight: 500;
+  animation: fadeInContainer 1s ease forwards;
 
-  .backgroundImage {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0.1;
-    object-fit: contain;
-    z-index: 0;
-  }
-
-  .overlayContent {
-    position: relative;
-    z-index: 1;
+  h1 {
+    color: $magenta;
     text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2.2rem;
+  }
 
-    h1 {
+  p {
+    background-color: #f9fcff;
+    padding: 1rem;
+    border-left: 4px solid $navy;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+    margin-bottom: 1rem;
+
+    a {
       color: $navy;
-      margin-bottom: 2rem;
-    }
-
-    p {
       font-weight: 600;
-      margin-bottom: 0.5rem;
+      margin-left: 0.3rem;
+      text-decoration: underline;
+
+      &:hover {
+        text-decoration: none;
+      }
     }
   }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInContainer {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.fadeIn {
+  opacity: 0;
+  animation: fadeInUp 0.6s ease forwards;
 }
