@@ -1,13 +1,35 @@
 @use '../styles/variables' as *;
 
+@keyframes fadeSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulseStar {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.4);
+    opacity: 1;
+  }
+}
+
 .imageContainer {
   position: relative;
-  height: 65vh;
+  min-height: 100vh;
+  padding: 2rem;
   display: flex;
   align-items: center;
-  justify-content: center;
-  margin-bottom: 2rem;
-  margin-top: 2rem;
+  overflow: hidden;
 
   .backgroundImage {
     position: absolute;
@@ -19,19 +41,157 @@
     z-index: 0;
   }
 
+  .star {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    animation: pulseStar 3s infinite ease-in-out;
+    opacity: 0.7;
+
+    @for $i from 1 through 12 {
+      &.star#{$i} {
+        animation-delay: #{($i - 1) * 0.6}s;
+      }
+    }
+
+    &.star1 {
+      top: 10%;
+      left: 15%;
+    }
+    &.star2 {
+      top: 25%;
+      right: 10%;
+    }
+    &.star3 {
+      bottom: 20%;
+      left: 30%;
+    }
+    &.star4 {
+      bottom: 15%;
+      right: 18%;
+    }
+    &.star5 {
+      top: 50%;
+      left: 45%;
+    }
+    &.star6 {
+      top: 5%;
+      right: 25%;
+    }
+    &.star7 {
+      top: 40%;
+      left: 5%;
+    }
+    &.star8 {
+      bottom: 35%;
+      right: 5%;
+    }
+    &.star9 {
+      top: 70%;
+      left: 20%;
+    }
+    &.star10 {
+      top: 30%;
+      right: 30%;
+    }
+    &.star11 {
+      bottom: 10%;
+      left: 50%;
+    }
+    &.star12 {
+      top: 20%;
+      right: 50%;
+    }
+  }
+
   .overlayContent {
     position: relative;
     z-index: 1;
-    text-align: center;
+    animation: fadeSlideUp 1s ease forwards;
+    opacity: 0;
+    text-align: left;
+    padding: 0 2rem;
+    width: 100%;
 
     h1 {
       color: $navy;
+      font-size: 2rem;
       margin-bottom: 2rem;
+      text-align: center;
     }
 
-    p {
-      font-weight: 600;
-      margin-bottom: 0.5rem;
+    .centered {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 2rem;
+
+      .entry {
+        margin-bottom: 0;
+      }
+    }
+
+    .entry {
+      margin-bottom: 2.5rem;
+
+      .header {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 0.3rem;
+
+        h2 {
+          margin: 0;
+          font-size: 1.4rem;
+          color: $magenta;
+        }
+
+        span {
+          font-size: 1.5rem;
+        }
+
+        .dates {
+          font-size: 0.9rem;
+          color: gray;
+          margin-top: 0.2rem;
+        }
+      }
+
+      .role {
+        font-weight: 600;
+        color: $blue;
+        margin-bottom: 0.5rem;
+      }
+
+      p {
+        margin: 0.3rem 0;
+        font-weight: 500;
+        color: $navy;
+      }
+
+      ul {
+        padding: 0;
+        list-style: none;
+
+        li {
+          margin-bottom: 0.4rem;
+          line-height: 1.6;
+        }
+      }
+
+      a {
+        color: $magenta;
+        text-decoration: underline;
+      }
+    }
+
+    .sideBySide {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+
+      .entry {
+        flex: 0 0 auto;
+        max-width: none;
+      }
     }
   }
 }
