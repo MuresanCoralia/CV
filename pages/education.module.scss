@@ -1,16 +1,13 @@
 @use '../styles/variables' as *;
 
 .overlayContent {
-  position: relative;
-  padding: 1.5rem;
-  width: 100%;
+  padding: 2rem 4rem;
   text-align: left;
   line-height: 1.7;
   font-weight: 500;
   animation: fadeInContainer 1s ease forwards;
 
   h1 {
-    color: $navy;
     text-align: center;
     margin-bottom: 1.5rem;
     font-size: 2.2rem;

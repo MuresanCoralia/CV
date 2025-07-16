@@ -18,23 +18,16 @@
     opacity: 0.7;
   }
   50% {
-    transform: scale(2.0);
+    transform: scale(2);
     opacity: 1;
   }
 }
 
 .imageContainer {
-  position: relative;
   padding: 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  position: relative;
 
   .backgroundImage {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
     opacity: 0.1;
     object-fit: contain;
     z-index: 0;
@@ -104,29 +97,15 @@
   }
 
   .overlayContent {
-    position: relative;
-    z-index: 1;
     animation: fadeSlideUp 1s ease forwards;
     opacity: 0;
     text-align: left;
     padding: 0 2rem;
-    width: 100%;
 
     h1 {
-      color: $navy;
       font-size: 2rem;
       margin-bottom: 2rem;
       text-align: center;
-    }
-
-    .centered {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 2rem;
-
-      .entry {
-        margin-bottom: 0;
-      }
     }
 
     .entry {
@@ -140,7 +119,6 @@
         h2 {
           margin: 0;
           font-size: 1.4rem;
-          color: $magenta;
         }
 
         span {
@@ -179,17 +157,6 @@
       a {
         color: $magenta;
         text-decoration: underline;
-      }
-    }
-
-    .sideBySide {
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-
-      .entry {
-        flex: 0 0 auto;
-        max-width: none;
       }
     }
   }

@@ -14,12 +14,12 @@ export default function Education() {
 
         <p className={styles.fadeIn} style={{ animationDelay: '0.8s' }}>
           <strong>Diploma Project:</strong> Voting website with blockchain. The project was made
-          using vanila js and a smart contract in solidity backend I used ethereum’s. On front end
-          I used web 3 and on blockchain. The way this application works is that an admin prepares
-          the election with candidates and sets the period time available for voting. After the
-          voting periods start, the admin can no longer modify anything, he can only see the votes
-          being casted and the results. The users can vote only during that time frame and at the
-          end the results are displayed for everybody.
+          using vanila js and a smart contract in solidity backend I used ethereum’s. On front end I
+          used web 3 and on blockchain. The way this application works is that an admin prepares the
+          election with candidates and sets the period time available for voting. After the voting
+          periods start, the admin can no longer modify anything, he can only see the votes being
+          casted and the results. The users can vote only during that time frame and at the end the
+          results are displayed for everybody.
         </p>
 
         <p className={styles.fadeIn} style={{ animationDelay: '1.4s' }}>

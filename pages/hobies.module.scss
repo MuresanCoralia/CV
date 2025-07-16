@@ -26,15 +26,12 @@
   }
 }
 
-.textContent {
-  position: relative;
-  z-index: 1;
+.overlayContent {
   text-align: center;
   padding: 1rem;
   max-width: 80%;
 
   h1 {
-    color: $navy;
     margin-bottom: 1rem;
   }
 

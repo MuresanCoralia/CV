@@ -1,34 +1,22 @@
 @use '../styles/variables' as *;
 
 .imageContainer {
-  position: relative;
   height: 65vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   margin-bottom: 2rem;
   margin-top: 2rem;
   padding: 1rem;
 
   .backgroundImage {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
     opacity: 0.2;
     object-fit: contain;
     z-index: 0;
   }
 
   .overlayContent {
-    position: relative;
-    z-index: 1;
     text-align: center;
-    width: 100%;
     max-width: 1200px;
 
     h1 {
-      color: $navy;
       margin-bottom: 2rem;
       opacity: 0;
       animation-name: fadeSlideUp;
@@ -86,10 +74,6 @@
       }
       p:nth-child(4) {
         animation-delay: 2s;
-      }
-
-      strong {
-        color: $magenta;
       }
     }
   }

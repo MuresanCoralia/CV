@@ -11,3 +11,32 @@ body {
   font-family: sans-serif;
   background-color: $beige;
 }
+
+h1,
+h2 {
+  color: $navy;
+}
+
+strong {
+  color: $magenta;
+}
+
+.imageContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .backgroundImage {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.overlayContent {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+}

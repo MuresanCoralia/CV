@@ -14,7 +14,7 @@ export default function Hobies() {
             priority
           />
         </div>
-        <div className={styles.textContent}>
+        <div className={styles.overlayContent}>
           <h1>Hiking</h1>
           <p>I enjoy spending time outdoors especially in the mountains.</p>
         </div>
@@ -30,7 +30,7 @@ export default function Hobies() {
             priority
           />
         </div>
-        <div className={styles.textContent}>
+        <div className={styles.overlayContent}>
           <h1>Reading</h1>
           <p>I enjoy reading books about personal development and autobiographies.</p>
         </div>
@@ -46,7 +46,7 @@ export default function Hobies() {
             priority
           />
         </div>
-        <div className={styles.textContent}>
+        <div className={styles.overlayContent}>
           <h1>Yoga</h1>
           <p>Practicing yoga helps me stay balanced, flexible, and mentally focused.</p>
         </div>
