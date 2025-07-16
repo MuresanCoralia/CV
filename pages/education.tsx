@@ -14,7 +14,7 @@ export default function Education() {
 
         <p className={styles.fadeIn} style={{ animationDelay: '0.8s' }}>
           <strong>Diploma Project:</strong> Voting website with blockchain. The project was made
-          using vanila js and a smart contract in solidity backend I used ethereum’s . On front end
+          using vanila js and a smart contract in solidity backend I used ethereum’s. On front end
           I used web 3 and on blockchain. The way this application works is that an admin prepares
           the election with candidates and sets the period time available for voting. After the
           voting periods start, the admin can no longer modify anything, he can only see the votes
@@ -23,12 +23,6 @@ export default function Education() {
         </p>
 
         <p className={styles.fadeIn} style={{ animationDelay: '1.4s' }}>
-          The admin sets up the election with candidates and a voting period. Once voting starts, no
-          changes can be made. Users vote within the timeframe, and results are publicly shown after
-          it ends.
-        </p>
-
-        <p className={styles.fadeIn} style={{ animationDelay: '1.8s' }}>
           🔗 GitHub repo:
           <a
             href="https://github.com/MuresanCoralia/SiteLicenta"
@@ -39,7 +33,7 @@ export default function Education() {
           </a>
         </p>
 
-        <p className={styles.fadeIn} style={{ animationDelay: '3s' }}>
+        <p className={styles.fadeIn} style={{ animationDelay: '2.0s' }}>
           <strong>2014 – 2018:</strong> “Gheorghe Șincai” High School, Cluj-Napoca — Baccalaureate
           in Mathematics and Computer Science.
         </p>

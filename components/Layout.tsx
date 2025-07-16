@@ -11,7 +11,7 @@ export default function Layout({ children }: LayoutProps) {
   return (
     <>
       <div className={styles.pageWrapper}>
-        <header>
+        <header className={styles.header}>
           <Navbar />
         </header>
         <main className={styles.main}>{children}</main>
