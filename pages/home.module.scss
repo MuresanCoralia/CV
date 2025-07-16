@@ -1,16 +1,83 @@
+
 .main {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
   align-items: center;
-  padding: 1rem;
-  text-align: center;
+  justify-content: flex-start;
+  padding: 2rem;
+  min-height: 100vh;
+  gap: 3rem;
+  position: relative; 
 
   .imageContainer {
-    flex-grow: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
+    flex: 0 0 40%;
+    max-width: 300px;
+
+    img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      user-select: none;
+    }
+  }
+
+  .textContainer {
+    flex: 1;
+    font-size: 1.15rem;
+    line-height: 1.6;
+    color: #1e293b;
+    font-weight: 500;
+    text-align: left;
+    max-width: 600px;
+  }
+}
+
+.floatingLogos {
+  position: fixed; 
+  top: 0;
+  right: 0;
+  width: 50vw;
+  height: 100vh;
+  pointer-events: none; 
+  overflow: visible;
+  z-index: 10;
+
+  .logo {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    animation: floatMove 8s ease-in-out infinite;
+    will-change: transform;
+
+    img {
+      width: 100%;
+      height: 100%;
+      user-select: none;
+    }
+  }
+
+  .logo1 { top: 10%; left: 20%; animation-delay: 0s; }
+  .logo2 { top: 30%; left: 70%; animation-delay: 1.5s; }
+  .logo3 { top: 50%; left: 40%; animation-delay: 3s; }
+  .logo4 { top: 70%; left: 10%; animation-delay: 4.5s; }
+  .logo5 { top: 20%; left: 60%; animation-delay: 6s; }
+  .logo6 { top: 60%; left: 30%; animation-delay: 7.5s; }
+  .logo7 { top: 80%; left: 50%; animation-delay: 9s; }
+}
+
+@keyframes floatMove {
+  0% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(15px, -15px);
+  }
+  50% {
+    transform: translate(-15px, 15px);
+  }
+  75% {
+    transform: translate(15px, 15px);
+  }
+  100% {
+    transform: translate(0, 0);
   }
 }

@@ -18,7 +18,13 @@ export default function Experience() {
           />
         ))}
 
-        <Image src="/assets/logo.png" alt="Logo" fill className={styles.backgroundImage} priority />
+        <Image
+          src="/assets/logo.png"
+          alt="Logo"
+          fill
+          className={styles.backgroundImage}
+          priority
+        />
 
         <div className={styles.overlayContent}>
           <h1>✨ Experience</h1>
@@ -29,7 +35,7 @@ export default function Experience() {
                 <span>💼</span>
                 <div>
                   <h2>Wayfare</h2>
-                  <p className={styles.dates}>02.05.2023 – Present (2+ years)</p>
+                  <p className={styles.dates}>02.05.2023 – Present  (2+ years)</p>
                 </div>
               </div>
               <p className={styles.role}>Full Stack Developer</p>
@@ -41,39 +47,13 @@ export default function Experience() {
               </p>
               <br></br>
               <ul>
-                <li>
-                  🤖 Designed and implemented a full-stack React + Next.js UI with a Node.js
-                  (NestJS) backend, integrating ChatGPT APIs to display AI-generated responses with
-                  custom styling, code formatting, and copy-to-clipboard functionality.
-                </li>
-                <li>
-                  📊 Developed a dynamic Angular admin dashboard for HR activity planning using
-                  Reactive Forms with editable rows, real-time validation, and ensured backend
-                  consistency with Progress OpenEdge.
-                </li>
-                <li>
-                  🔐 Designed and built full auth systems in two projects: one with React/Next.js +
-                  Node.js/NestJS, another with Angular + Progress OpenEdge. Both included login,
-                  registration, email confirmation, password reset, and Mailgun email integration.
-                </li>
-                <li>
-                  🖼️ Built a rich text editor dialog (Kolkov Angular) with image upload and
-                  embedding, using relational mapping for atomic saves and efficient content/image
-                  retrieval.
-                </li>
-                <li>
-                  🧩 Developed an Electron-based desktop app with React and React Flow to visualize
-                  complex JSON as interactive node-link diagrams, featuring zoom, search, tabbed
-                  views, label toggles, and PNG export.
-                </li>
-                <li>
-                  🎨 Created a full Figma design and translated it into a production-ready Angular
-                  app with Progress backend integration.
-                </li>
-                <li>
-                  🔧 Delivered dynamic Angular components with conditional rendering and behavior,
-                  adapting layout and logic based on input metadata.
-                </li>
+                <li>🤖 Designed and implemented a full-stack React + Next.js UI with a Node.js (NestJS) backend, integrating ChatGPT APIs to display AI-generated responses with custom styling, code formatting, and copy-to-clipboard functionality.</li>
+                <li>📊 Developed a dynamic Angular admin dashboard for HR activity planning using Reactive Forms with editable rows, real-time validation, and ensured backend consistency with Progress OpenEdge.</li>
+                <li>🔐 Designed and built full auth systems in two projects: one with React/Next.js + Node.js/NestJS, another with Angular + Progress OpenEdge. Both included login, registration, email confirmation, password reset, and Mailgun email integration.</li>
+                <li>🖼️ Built a rich text editor dialog (Kolkov Angular) with image upload and embedding, using relational mapping for atomic saves and efficient content/image retrieval.</li>
+                <li>🧩 Developed an Electron-based desktop app with React and React Flow to visualize complex JSON as interactive node-link diagrams, featuring zoom, search, tabbed views, label toggles, and PNG export.</li>
+                <li>🎨 Created a full Figma design and translated it into a production-ready Angular app with Progress backend integration.</li>
+                <li>🔧 Delivered dynamic Angular components with conditional rendering and behavior, adapting layout and logic based on input metadata.</li>
               </ul>
             </section>
           </div>
