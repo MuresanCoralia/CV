@@ -22,7 +22,7 @@ export default function Navbar() {
       <ul className={styles.navItems}>
         {navLinks.map(({ href, label }) => (
           <li key={href}>
-            <Link href={href} className={router.pathname === href ? 'active' : ''}>
+            <Link href={href} className={router.pathname === href ? styles.active : ''}>
               {label}
             </Link>
           </li>

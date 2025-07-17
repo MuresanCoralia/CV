@@ -85,13 +85,18 @@ export default function Experience() {
             </div>
             <p className={styles.role}>Internship – Mobile Development</p>
             <ul>
-              <li>🤝 Built online test-taking app in a team.</li>
+              <li>
+                🤝 Worked closely with a small Agile team to build an iOS app in Swift that lets
+                students take online tests. I helped implement features like login, smooth question
+                flow, timers, and score summaries — all aimed at making the testing experience
+                simple and user-friendly.
+              </li>
             </ul>
           </section>
 
           <section className={styles.entry}>
             <div className={styles.header}>
-              <span>🍽️</span>
+              <span>🧑‍🍳</span>
               <div>
                 <h2>Wolfpack Digital</h2>
                 <p className={styles.dates}>19.07.2021 – 27.08.2021</p>
@@ -99,7 +104,11 @@ export default function Experience() {
             </div>
             <p className={styles.role}>Internship – Mobile Development</p>
             <ul>
-              <li>🧑‍🍳 Solo-built recipe app with Swift.</li>
+              <li>
+                🤝 Built a food recipe app from scratch in Swift as a solo project. I designed and
+                developed everything — from browsing and searching recipes to viewing detailed
+                instructions — and wrapped it up by presenting a live demo of the final product.
+              </li>
               <li>
                 🎥{' '}
                 <a
