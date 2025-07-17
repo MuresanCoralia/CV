@@ -33,7 +33,7 @@ export default function Blogs() {
             dialog interface for technical questions. The goal was to allow formatted text and
             images within the ‘Description’ field.
           </p>
-          <Image src="/assets/richtexteditor1.jpeg" alt="" width={400} height={300} />
+          <Image src="/assets/richtexteditor.jpeg" alt="" width={400} height={300} />
           <p>
             <strong>Implementation Steps:</strong>
           </p>
@@ -44,9 +44,35 @@ export default function Blogs() {
             <li>
               Bind config using <code>[config]</code> pointing to an <code>editorConfig</code>
             </li>
-            <Image src="/assets/richtexteditor2.jpeg" alt="" width={600} height={300} />
+            <pre>
+              <code>
+                {`<angular-editor>
+  formControlName="Description"
+  [config]="editorConfig"
+  [ngClass]="{
+    'error-editor':
+      questionForm.get('Description')?.touched &&
+      questionForm.get('Description')?.hasError('required')
+  }">
+</angular-editor>`}
+              </code>
+            </pre>
             <li>Define config with height, placeholders, and hidden buttons</li>
-            <Image src="/assets/richtexteditor3.jpeg" alt="" width={600} height={300} />
+            <pre>
+              <code>
+                {`editorConfig: AngularEditorConfig = {
+    editable: true,
+    spellcheck: true,
+    height: 200px,
+    minHeight: 100px,
+    placeholder: 'Description *',
+    translate: no,
+    defaultParagraphSeparator: 'p',
+    defaultFontName: 'Arial',
+    toolbarHiddenButtons: [['backgroundColor', 'toggleEditorMode']]
+}`}
+              </code>
+            </pre>
             <li>
               Extract images from clob and replace with references (e.g. <code>image-1730...</code>)
             </li>
@@ -55,15 +81,52 @@ export default function Blogs() {
             </li>
             <li>
               <code>getImageOrVideo()</code> filters videos and extracts images
-              <Image src="/assets/richtexteditor4.jpeg" alt="" width={800} height={300} />
+              <pre>
+                <code>
+                  {`private getImageOrVideo(description: string, regex: any): void {
+    this.images = description.match(regex);
+    if (description.includes('<a href=')) {
+      this.images = this.images?.filter((file: any) => !file.includes('http'));
+      this.imagesDescription = this.imagesDescription?.filter(
+        (file: any) => !file.includes('http')
+      );
+    }
+  }`}
+                </code>
+              </pre>
             </li>
             <li>In "create", save images and replace HTML with filename references</li>
-            <Image src="/assets/richtexteditor5.jpeg" alt="" width={600} height={150} />
+            <pre>
+              <code>
+                {`questionData.Description = questionData.Description.replace(
+    image,
+    '<img src=\${image_icon_path}/>(' + file.Name + ')'
+);`}
+              </code>
+            </pre>
             <li>In "update", same logic with handling of previously stored clobs</li>
-            <Image src="/assets/richtexteditor6.jpeg" alt="" width={600} height={150} />
+            <pre>
+              <code>
+                {`this.questionFile?.forEach(file => {
+  questionData.Description = questionData.Description.replace(
+    \`<img src="\${file.CLOB}">\`,
+    \`<img src='\${image_icon_path}'/> (\${file.Name})\`
+  );
+});`}
+              </code>
+            </pre>
             <li>Even if description isn’t changed, clobs must be replaced</li>
             <li>On display, fetch and inject image clobs into references</li>
-            <Image src="/assets/richtexteditor7.jpeg" alt="" width={600} height={150} />
+            <pre>
+              <code>
+                {`if (attachment.ImageDescriptio)
+  this.question.Description = this.question.Description.replace(
+    \`<img src="\${image_icon_path}"/>(\${attachment.Name})\`,
+    \`<img src='\${attachment.CLOB}'/>\`
+  );
+`}
+              </code>
+            </pre>
             <li>
               Use <code>[innerHTML]</code> to preserve formatting
             </li>
@@ -77,6 +140,174 @@ export default function Blogs() {
     },
     {
       id: 2,
+      title: 'Electron Integration with Vite + React',
+      content: (
+        <>
+          <p>
+            <strong>Introduction:</strong> This project uses Electron in combination with Vite and
+            React to turn a modern web app into a cross-platform desktop application.
+          </p>
+
+          <p>
+            <strong>How Electron Works</strong>
+          </p>
+          <ul>
+            <li>
+              <strong>Main Process:</strong> Runs the Electron app, creates windows, handles
+              OS-level interactions.
+            </li>
+            <li>
+              <strong>Renderer Process:</strong> Runs your frontend (the React app in this case),
+              similar to a browser tab.
+            </li>
+          </ul>
+
+          <p>
+            <strong>In this project:</strong>
+          </p>
+          <ul>
+            <li>The React app is bundled with Vite.</li>
+            <li>
+              Electron loads the final <code>dist/index.html</code> into a desktop window.
+            </li>
+            <li>
+              We use <code>electron-builder</code> to package the app and generate an{' '}
+              <code>.exe</code>.
+            </li>
+          </ul>
+
+          <p>
+            <strong>Vite + React Setup (vite.config.ts)</strong>
+          </p>
+          <pre>
+            <code>{`import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+
+export default defineConfig({
+  base: './',
+  plugins: [react()],
+  build: {
+    outDir: 'dist',
+  },
+});`}</code>
+          </pre>
+          <ul>
+            <li>
+              <code>base: './'</code>: Ensures relative paths in index.html for Electron.
+            </li>
+            <li>
+              <code>plugins: [react()]</code>: Adds React support.
+            </li>
+            <li>
+              <code>build.outDir</code>: Output folder used by Electron.
+            </li>
+          </ul>
+
+          <p>
+            <strong>Electron Main Process (electron/main.ts)</strong>
+          </p>
+          <pre>
+            <code>{`import { app, BrowserWindow } from 'electron';
+import * as path from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+function createWindow() {
+  const win = new BrowserWindow({
+    width: 1000,
+    height: 800,
+    icon: path.join(__dirname, '../public/icon.ico'),
+    webPreferences: {
+      contextIsolation: true,
+    },
+  });
+
+  win.loadFile(path.join(__dirname, '../dist/index.html'));
+}
+
+app.whenReady().then(() => {
+  createWindow();
+  app.on('activate', () => {
+    if (BrowserWindow.getAllWindows().length === 0) createWindow();
+  });
+});
+
+app.on('window-all-closed', () => {
+  if (process.platform !== 'darwin') app.quit();
+});`}</code>
+          </pre>
+
+          <p>
+            <strong>TypeScript Config (tsconfig.electron.json)</strong>
+          </p>
+          <pre>
+            <code>{`{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "ES2020",
+    "moduleResolution": "node",
+    "outDir": "dist-electron",
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "strict": true,
+    "skipLibCheck": true
+  },
+  "include": ["electron/**/*"]
+}`}</code>
+          </pre>
+
+          <p>
+            <strong>Electron Builder Config (in package.json)</strong>
+          </p>
+          <pre>
+            <code>{`"build": {
+  "appId": "com.crossway.viewer",
+  "productName": "Crossway Diagram Viewer",
+  "files": [
+    "dist/**/*",
+    "dist-electron/**/*"
+  ],
+  "extraMetadata": {
+    "main": "dist-electron/main.js"
+  },
+  "win": {
+    "target": "nsis",
+    "icon": "./public/icon.ico"
+  }
+}`}</code>
+          </pre>
+
+          <p>
+            <strong>Usage</strong>
+          </p>
+          <ol>
+            <li>
+              Run <code>npm install</code>
+            </li>
+            <li>
+              Run <code>npm run electron:dev</code> to build and launch the app in dev mode
+            </li>
+            <li>
+              Run <code>npm run make</code> to generate the installable .exe
+            </li>
+          </ol>
+
+          <p>
+            <strong>Notes:</strong>
+          </p>
+          <ul>
+            <li>The icon should be 256x256 or larger for proper Windows usage.</li>
+            <li>Final output size (~190MB) is normal due to Chromium packaging.</li>
+            <li>
+              <code>dist/</code> and <code>dist-electron/</code> are generated during the build.
+            </li>
+          </ul>
+        </>
+      ),
+    },
+    {
+      id: 3,
       title: 'FormArrays in Angular',
       content: (
         <p>
@@ -86,18 +317,8 @@ export default function Blogs() {
       ),
     },
     {
-      id: 3,
-      title: 'Electron Integration',
-      content: (
-        <p>
-          <strong>Coming soon:</strong> How to integrate Angular with Electron for desktop app
-          deployment using cross-platform packaging.
-        </p>
-      ),
-    },
-    {
       id: 4,
-      title: 'Unit Testing Angular Apps',
+      title: 'Unit Testing in Angular',
       content: (
         <p>
           <strong>Coming soon:</strong> Best practices for testing services, components, and

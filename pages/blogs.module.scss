@@ -102,13 +102,22 @@
       }
     }
 
+    pre {
+      margin-bottom: 1rem;
+
+      code {
+        background-color: #d7d7d7;
+        color: #0b4fa3;
+      }
+    }
+
     code {
       background-color: $soft-blue;
       padding: 0.2rem 0.5rem;
       border-radius: 5px;
       font-family: 'Courier New', Courier, monospace;
       font-size: 0.9rem;
-      color: $magenta;
+      color: $navy;
     }
 
     strong {
