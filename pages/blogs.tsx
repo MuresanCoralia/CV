@@ -424,10 +424,163 @@ app.on('window-all-closed', () => {
       id: 4,
       title: 'Unit Testing in Angular',
       content: (
-        <p>
-          <strong>Coming soon:</strong> Best practices for testing services, components, and
-          reactive forms in Angular using Jasmine and Karma.
-        </p>
+        <div>
+          <p>
+            <strong>Introduction to Angular and the Importance of Unit Testing</strong>
+          </p>
+          <p>
+            Angular is a popular framework for building interactive and complex web applications. It
+            allows developers to create responsive, dynamic single-page applications using
+            TypeScript, a superset of JavaScript that adds static typing and other features that
+            improve code quality and maintainability.
+          </p>
+          <p>
+            Unit testing in Angular is like a safety net for applications. It ensures that
+            individual units of code, such as functions and components, work as expected. It allows
+            developers to catch errors early, makes sure that each component or service behaves as
+            intended, and ensures that changes do not break existing features. Although writing
+            tests requires an initial time investment, it ends up making maintenance easier by
+            minimizing manual testing.
+          </p>
+          <p>
+            <strong>Setting Up the Testing Environment</strong>
+          </p>
+          <p>To create and run tests in Angular, two tools are needed: Jasmine and Karma.</p>
+          <ol>
+            <li>
+              <u>Jasmine</u> is a testing framework that provides the functions and syntax needed to
+              organize and structure tests. It helps organize tests by grouping related tests into
+              <code>describe</code> blocks and defining individual tests with <code>it</code>{' '}
+              blocks. Jasmine’s intuitive syntax makes easy to read and understand test cases.
+            </li>
+            <li>
+              <u>Karma</u>is a test runner, developed by Angular team, that automatically executes
+              tests whenever changes are made in the code, so developers don’t have to manually
+              rerun tests after each update. The <code>karma.conf.js</code> configuration file
+              allows developers to set options like which browsers to test in, which files to
+              include or exclude, and many other configurations. This setup helps customize the test
+              environment to fit the project’s needs.
+            </li>
+          </ol>
+          <p>
+            For installation, in a new Angular project, the Angular CLI automatically sets up
+            Jasmine and Karma as part of the default testing environment. To add or update the
+            testing setup in an existing project, start by running <code>ng add @angular/cli</code>,
+            which installs any necessary testing dependencies if they aren’t already present. This
+            command ensures the project is fully prepared to support unit testing.
+          </p>
+          <p>
+            After setting up the basic environment, additional configurations can be made in
+            <code>karma.conf.js</code> as needed. Once these configurations are complete, tests can
+            be executed with the command <code>ng test</code>, which launches Karma to run the tests
+            and displays the results.
+          </p>
+          <p>
+            <strong>Structure of an Angular Unit Test File</strong>
+          </p>
+          <p>Each test file generally includes the following sections: </p>
+          <ol>
+            <li>
+              <strong>TestBed</strong> – is Angular’s main tool for setting up the testing
+              environment. It prepares everything needed to test a specific component or service by
+              providing the necessary dependencies. To use TestBed, the
+              <code>TestBed.configureTestingModule</code> method is called, allowing specification
+              of the components, services and modules needed for tests. This step is essential
+              because each component or service rely on certain dependencies to work properly.
+              <pre>
+                <code>
+                  {' '}
+                  {` await Testbed.configureTestingModule({
+    imports: [MatmenuModule, MatDatepickerModule, SharedTestingModule],
+    declarations: [ActionsBarComponent, HasAuthorityDirective],
+    providers: [DatePipe],
+  }).compileComponents();`}{' '}
+                </code>
+              </pre>
+              The imports, declarations and providers sections should include any modules,
+              components or services that the component under test depends on to ensure everything
+              works correctly during testing.
+            </li>
+            <li>
+              <strong>beforeEach/afterEach</strong> – Hooks for setting up and tearing down test
+              state before and after each test case.
+            </li>
+            <li>
+              <strong>Fixture</strong> – is a testing utility that creates a testing environment for
+              a component by giving direct access to its logic and DOM. The fixture also includes
+              change detection, which automatically updates the component whenever its data changes,
+              similar to how Angular keeps components updated in a live application. This makes it
+              possible to test how a component reacts to changes in real time.
+              <pre>
+                <code>
+                  {' '}
+                  {` beforeEach(() => {
+    fixture = TextBed.createComponent(FeedbackDialogComponent);
+    component = fixture.componentInstance
+    fixture.detectChanges();
+  });`}{' '}
+                </code>
+              </pre>
+            </li>
+            <li>
+              <strong>It block</strong> – is where each test is defined. Inside each <code>it</code>{' '}
+              block, there is usually an expectation that verifies if the functionality works as
+              expected. The description given to <code>it</code> should clearly state what behavior
+              is being tested, making it easy to understand what the test is checking.
+              <pre>
+                <code>
+                  {' '}
+                  {` it('should create', () => {
+    expect(component).toBeTruthy();
+  });`}{' '}
+                </code>
+              </pre>
+              In this example, the it block is checking if the component is created successfully by
+              checking that it is ‚truthy’(it exists and is properly defined). Jasmine offers
+              various matchers to check expected outcomes:
+              <ul>
+                <br></br>
+                <li>toBe: checks for strict equality(byreference). </li>
+                <li>toEqual: checks for deep equality(by content).</li>
+                <li>
+                  toBeTruthy/toBeFalsy: Verifies if a value is true or false, such as if it exists
+                  or is null..
+                </li>
+                <li>toContain: Checks if an array or string contains a specific value.</li>
+              </ul>
+            </li>
+            <li>
+              <strong>Spies</strong> – are tools that track calls to function or methods and they
+              are especially useful for testing components that depend on services or other
+              functions. By using spies, developers can check if a specific function was called, how
+              many times it was called and what arguments were passed to it.
+              <pre>
+                <code>
+                  {' '}
+                  {` it('should call "read" method with the corect parameters', () => {
+    const questionId = '1';
+    const resourceUrl = 'Question';
+
+    service.readAnswerByQuestionId(questionId).subscribe();
+    expect(readSpy).toHaveBeenCalledWith(resourceUrl, questionId);
+  });`}{' '}
+                </code>
+              </pre>
+              In this example, the <code>expect(readSpy).toHaveBeenCalledWith(...)</code> check
+              verifies if the <code>readAnswerByQuestionId</code> method was called with the correct
+              parameters. If it was called as expected, the test passes, otherwise, if fails.
+            </li>
+          </ol>
+          <p>
+            <strong>Conclusion</strong>
+          </p>
+          <p>
+            By following these principles and practices, unit testing in Angular helps ensure that
+            every component, service, and module functions as expected. Writing effective tests
+            allows developers to confidently maintain and expand Angular applications, catching
+            issues early and improving code stability.
+          </p>
+        </div>
       ),
     },
   ];
