@@ -1,6 +1,5 @@
 'use client';
-
-import { JSX, useState } from 'react';
+import { JSX, useRef, useState } from 'react';
 import Image from 'next/image';
 import styles from './blogs.module.scss';
 
@@ -12,9 +11,27 @@ type Blog = {
 
 export default function Blogs() {
   const [expandedId, setExpandedId] = useState<number | null>(null);
+  const blogHeaderRefs = useRef<Record<number, HTMLDivElement | null>>({});
 
   const toggleExpand = (id: number) => {
-    setExpandedId((prev) => (prev === id ? null : id));
+    if (expandedId === id) {
+      setExpandedId(null);
+      return;
+    }
+
+    if (expandedId !== null) {
+      setExpandedId(null);
+
+      setTimeout(() => {
+        setExpandedId(id);
+        const el = blogHeaderRefs.current[id];
+        el?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 400);
+    } else {
+      setExpandedId(id);
+      const el = blogHeaderRefs.current[id];
+      el?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   };
 
   const blogs: Blog[] = [
@@ -729,7 +746,13 @@ app.on('window-all-closed', () => {
               key={blog.id}
               className={`${styles.blogEntry} ${expandedId === blog.id ? styles.expanded : ''}`}
             >
-              <div className={styles.blogHeader} onClick={() => toggleExpand(blog.id)}>
+              <div
+                className={styles.blogHeader}
+                ref={(el) => {
+                  blogHeaderRefs.current[blog.id] = el;
+                }}
+                onClick={() => toggleExpand(blog.id)}
+              >
                 <h3>{blog.title}</h3>
                 <span>{expandedId === blog.id ? '−' : '+'}</span>
               </div>
@@ -742,7 +765,7 @@ app.on('window-all-closed', () => {
                 }}
               >
                 {blog.content}
-                <br></br>
+                <br />
               </div>
             </div>
           ))}
