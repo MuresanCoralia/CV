@@ -220,18 +220,20 @@ export default function Blogs() {
           </p>
 
           <p>
-            <strong>How Electron Works</strong>
+            <strong>How Electron Works: </strong>
+            Electron is a framework that allows you to create desktop applications using web
+            technologies like HTML, CSS, and JavaScript. It has two main processes:
           </p>
-          <ul>
+          <ol>
             <li>
-              <strong>Main Process:</strong> Runs the Electron app, creates windows, handles
-              OS-level interactions.
+              <u>Main Process</u>: Runs the Electron app, creates windows, handles OS-level
+              interactions.
             </li>
             <li>
-              <strong>Renderer Process:</strong> Runs your frontend (the React app in this case),
-              similar to a browser tab.
+              <u>Renderer Process</u>: Runs your frontend (the React app in this case), similar to a
+              browser tab.
             </li>
-          </ul>
+          </ol>
 
           <p>
             <strong>In this project:</strong>
@@ -250,6 +252,7 @@ export default function Blogs() {
           <p>
             <strong>Vite + React Setup (vite.config.ts)</strong>
           </p>
+          <br></br>
           <pre>
             <code>{`import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
@@ -264,19 +267,22 @@ export default defineConfig({
           </pre>
           <ul>
             <li>
-              <code>base: './'</code>: Ensures relative paths in index.html for Electron.
+              <code>base: './'</code>:Ensures relative paths in index.html, important for Electron
+              where the app isn’t served from a web server.
             </li>
             <li>
-              <code>plugins: [react()]</code>: Adds React support.
+              <code>plugins: [react()]</code>: Adds React support to Vite.
             </li>
             <li>
-              <code>build.outDir</code>: Output folder used by Electron.
+              <code>build.outDir</code>: Tells Vite to place the production build in the dist folder
+              (used by Electron to load the UI).
             </li>
           </ul>
 
           <p>
             <strong>Electron Main Process (electron/main.ts)</strong>
           </p>
+          <br></br>
           <pre>
             <code>{`import { app, BrowserWindow } from 'electron';
 import * as path from 'path';
@@ -308,10 +314,18 @@ app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit();
 });`}</code>
           </pre>
-
+          <p>
+            <u>What it does:</u>
+            <ul>
+              <li>Creates a window and loads your index.html from Vite.</li>
+              <li>The icon appears in the window title bar and taskbar.</li>
+              <li>contextIsolation: true: Security feature recommended by Electron.</li>
+            </ul>
+          </p>
           <p>
             <strong>TypeScript Config (tsconfig.electron.json)</strong>
           </p>
+          <br></br>
           <pre>
             <code>{`{
   "compilerOptions": {
@@ -327,10 +341,21 @@ app.on('window-all-closed', () => {
   "include": ["electron/**/*"]
 }`}</code>
           </pre>
-
+          <p>
+            <u>What it does:</u>
+            <ul>
+              <li>
+                Compiles your Electron source files (e.g., main.ts) to JavaScript in the dist
+                electron/ folder.
+              </li>
+              <li>Ensures modern JS output and correct module handling.</li>
+              <li>include: Points to your Electron source directory.</li>
+            </ul>
+          </p>
           <p>
             <strong>Electron Builder Config (in package.json)</strong>
           </p>
+          <br></br>
           <pre>
             <code>{`"build": {
   "appId": "com.crossway.viewer",
@@ -348,7 +373,15 @@ app.on('window-all-closed', () => {
   }
 }`}</code>
           </pre>
-
+          <p>
+            <u>What it does:</u>
+            <ul>
+              <li>files: Includes built frontend and Electron files.</li>
+              <li>main: Defines the Electron entry point.</li>
+              <li> win.icon: Custom app icon for the Windows .exe.</li>
+              <li>target: nsis: Generates a Windows installer.</li>
+            </ul>
+          </p>
           <p>
             <strong>Usage</strong>
           </p>
@@ -367,9 +400,9 @@ app.on('window-all-closed', () => {
           <p>
             <strong>Notes:</strong>
           </p>
+          <br></br>
           <ul>
             <li>The icon should be 256x256 or larger for proper Windows usage.</li>
-            <li>Final output size (~190MB) is normal due to Chromium packaging.</li>
             <li>
               <code>dist/</code> and <code>dist-electron/</code> are generated during the build.
             </li>
