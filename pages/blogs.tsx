@@ -27,11 +27,16 @@ export default function Blogs() {
             <strong>Introduction:</strong> In the evolving landscape of web development, rich text
             editors play a vital role in content creation. <strong>Angular Editor Kolkov</strong> is
             a powerful, Angular-specific tool offering a clean UI and strong integration features.
+            With its robust features, user friendly interface, and seamless integration
+            capabilities, Kolkov offers developers an efficient way to implement rich text editing
+            functionality.
           </p>
           <p>
-            <strong>Requirement:</strong> In our application, we needed a rich text editor in a
-            dialog interface for technical questions. The goal was to allow formatted text and
-            images within the ‘Description’ field.
+            <strong>Requirement:</strong> In this application we have a dialog interface for
+            technical questions. This dialog includes mandatory inputs for the question title and
+            description and some optional inputs for the technology in question and attachments. For
+            the ‘Description’ input we had to make a rich text editor where the user could add
+            images, format the text and so on.
           </p>
           <Image src="/assets/richtexteditor.jpeg" alt="" width={400} height={300} />
           <p>
@@ -42,7 +47,9 @@ export default function Blogs() {
               Install with <code>npm install @kolkov/angular-editor --save</code>
             </li>
             <li>
-              Bind config using <code>[config]</code> pointing to an <code>editorConfig</code>
+              After a successful installation, we integrated the editor into the html file. One
+              important property is the variable <code>editorConfig</code> from{' '}
+              <code>[config]</code>.
             </li>
             <pre>
               <code>
@@ -57,7 +64,10 @@ export default function Blogs() {
 </angular-editor>`}
               </code>
             </pre>
-            <li>Define config with height, placeholders, and hidden buttons</li>
+            <li>
+              Next, we defined the variable within the TypeScript file with values for height,
+              placeholder, hidden buttons and so on.
+            </li>
             <pre>
               <code>
                 {`editorConfig: AngularEditorConfig = {
@@ -74,16 +84,37 @@ export default function Blogs() {
               </code>
             </pre>
             <li>
-              Extract images from clob and replace with references (e.g. <code>image-1730...</code>)
+              Our primary focus was the feature that allows images inside the text. In this editor
+              the image is added as a clob inside the text. Since the text containing clobs can be
+              too large to send to back end we created a way to save the images as separate
+              attachments. Once an image is saved as an attachment, the clob in the text is replaced
+              with a reference to it (in our case <code>image-1730207134000.jpeg</code>, where the
+              number is the time zone) and then sent to back end. On read, we get the attachments
+              and map them to replace the references in text and display the images through the
+              text.
             </li>
             <li>
-              Use regex <code>extractImageContent</code> to get embedded images
+              Most of the work is carried out by the function that saves the technical question. We
+              started by extracting the images from the description text using a regex. They are
+              saved in variable
+              <code>imagesDescription</code> and the regex used is saved in
+              <code>extractImageContent</code>.
             </li>
+            <pre>
+              <code>
+                {`this.imageDescription = questionData.Description.match(extractImagContent);`}
+              </code>
+            </pre>
+
             <li>
-              <code>getImageOrVideo()</code> filters videos and extracts images
-              <pre>
-                <code>
-                  {`private getImageOrVideo(description: string, regex: any): void {
+              After that, we call <code>getImageOrVideo</code> function for both create and update
+              cases. This retrieves the images with the html tags <code>{'<img src=…>'}</code> not
+              just the clob and filters out any video paths, as the editor supports videos that do
+              not require any changes.
+            </li>
+            <pre>
+              <code>
+                {`private getImageOrVideo(description: string, regex: any): void {
     this.images = description.match(regex);
     if (description.includes('<a href=')) {
       this.images = this.images?.filter((file: any) => !file.includes('http'));
@@ -92,10 +123,14 @@ export default function Blogs() {
       );
     }
   }`}
-                </code>
-              </pre>
+              </code>
+            </pre>
+            <li>
+              {' '}
+              For the create scenario, we just iterate through the images extracted and create the
+              attachments. For each image we replace it in the description with an image icon and
+              the file name.{' '}
             </li>
-            <li>In "create", save images and replace HTML with filename references</li>
             <pre>
               <code>
                 {`questionData.Description = questionData.Description.replace(
@@ -104,7 +139,13 @@ export default function Blogs() {
 );`}
               </code>
             </pre>
-            <li>In "update", same logic with handling of previously stored clobs</li>
+            <li>
+              For the update we must do more actions. After <code>getImageOrVideo</code> function,
+              we replace the images extracted with its references for the before description, just
+              as we do for the create case. Next, we create the new attachments needed from the
+              description and we update the current description to replace all the clobs. This way
+              we can safely send to back end.{' '}
+            </li>
             <pre>
               <code>
                 {`this.questionFile?.forEach(file => {
@@ -115,8 +156,20 @@ export default function Blogs() {
 });`}
               </code>
             </pre>
-            <li>Even if description isn’t changed, clobs must be replaced</li>
-            <li>On display, fetch and inject image clobs into references</li>
+            <li>
+              {' '}
+              In case the description is not updated, only the other fields, we still need to
+              replace the clobs with the corresponding references to ensure the data can be properly
+              sent to the backend.
+            </li>
+            <li>
+              {' '}
+              For when we need to display the description, we read it from the back end and when we
+              retrieve the attachments, we replace the reference with its attachment clob. Since we
+              allow users to upload separate attachments for a question, we added a Boolean field
+              ‘ImageDescription’ to distinguish between those files and the images from the
+              description.{' '}
+            </li>
             <pre>
               <code>
                 {`if (attachment.ImageDescriptio)
@@ -128,12 +181,30 @@ export default function Blogs() {
               </code>
             </pre>
             <li>
-              Use <code>[innerHTML]</code> to preserve formatting
+              Then, to show the description in the format made by the user (with bold, italics,
+              colored text, etc.) we added the property <code>[innerHTML]</code> to the {'<div>'}{' '}
+              element that displays the saved description. This ensures the text appears as
+              intended, with all user-applied styles intact.
             </li>
+            <pre>
+              <code>
+                {`<div
+  [innerHtml]="qiestion.Description"
+  class="question-decription"
+`}
+              </code>
+            </pre>
           </ol>
           <p>
-            <strong>Conclusion:</strong> This approach keeps user formatting, stores media
-            efficiently, and ensures performance and backend compatibility.
+            <strong>Conclusion:</strong> In conclusion, integrating Angular Editor Kolkov into an
+            Angular application significantly enhances the user experience by providing a rich text
+            editor capable of handling complex content such as images and formatted text. The
+            implementation process, from installation to configuration and customization, ensures a
+            smooth and efficient way to handle dynamic content creation, especially in cases where
+            rich formatting and media embedding are essential, as demonstrated with the technical
+            question dialog in this case. The solution of separating images as attachments while
+            maintaining the ability to display them within the text is a practical approach to
+            managing large content, ensuring scalability, and optimizing data transfer.
           </p>
         </>
       ),
