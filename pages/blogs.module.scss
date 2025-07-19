@@ -1,0 +1,134 @@
+@use '../styles/variables' as *;
+
+@keyframes fadeSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.imageContainer {
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.overlayContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;
+  z-index: 2;
+  position: relative;
+}
+
+.pageTitle {
+  font-size: 2.5rem;
+  color: $navy;
+  margin-bottom: 1rem;
+  animation: fadeSlideUp 1s ease-out forwards;
+  opacity: 0;
+}
+
+.pageSubtitle {
+  font-size: 1.4rem;
+  color: $blue;
+  margin-bottom: 2rem;
+  animation: fadeSlideUp 1s ease-out forwards;
+  animation-delay: 0.2s;
+  opacity: 0;
+}
+
+.blogEntry {
+  border-radius: 1rem;
+  border: 1px solid $blue;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  margin-bottom: 2rem;
+  transition: all 0.4s ease;
+  width: 100%;
+  overflow: hidden;
+  opacity: 0;
+  animation: fadeSlideUp 1s ease-out forwards;
+  animation-delay: 0.4s;
+
+  .blogHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    background-color: $soft-blue;
+    padding: 1.5rem 2rem;
+    border-radius: 1rem 1rem 0 0;
+
+    h3 {
+      margin: 0;
+      font-size: 1.4rem;
+      color: $magenta;
+    }
+
+    span {
+      font-size: 2rem;
+      color: $magenta;
+    }
+  }
+
+  .blogContent {
+    padding: 0 2rem;
+    transition:
+      max-height 0.4s ease,
+      padding 0.3s ease;
+
+    p,
+    ol {
+      margin-top: 1rem;
+      font-size: 1rem;
+      color: $navy;
+    }
+
+    ol {
+      padding-left: 1.5rem;
+
+      li {
+        margin-bottom: 0.75rem;
+        font-weight: 500;
+      }
+    }
+
+    pre {
+      margin-bottom: 1rem;
+
+      code {
+        background-color: #e5e5e5;
+        color: #0b4fa3;
+      }
+    }
+
+    code {
+      background-color: $soft-blue;
+      padding: 0.2rem 0.5rem;
+      border-radius: 5px;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.9rem;
+      color: $navy;
+    }
+
+    strong {
+      color: $blue;
+    }
+
+    img {
+      margin: 1rem 0;
+      border-radius: 0.5rem;
+      max-width: 100%;
+      height: auto;
+    }
+  }
+}

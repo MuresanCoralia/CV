@@ -26,6 +26,17 @@ export default function Home() {
           and I’m especially excited about blending AI and data visualization to build smarter, more
           engaging applications.
         </p>
+        <p>
+          You can check my{' '}
+          <a
+            href="https://github.com/MuresanCoralia?tab=repositories"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            GitHub
+          </a>
+          .
+        </p>
       </div>
 
       <div className={styles.floatingLogos}>

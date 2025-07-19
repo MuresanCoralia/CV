@@ -11,6 +11,7 @@ export default function Navbar() {
     { href: '/education', label: 'Education' },
     { href: '/softskills', label: 'Soft skills' },
     { href: '/hobies', label: 'Hobies' },
+    { href: '/blogs', label: 'Blogs' },
   ];
 
   return (
