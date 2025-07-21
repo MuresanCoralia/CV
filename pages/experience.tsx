@@ -51,9 +51,10 @@ export default function Experience() {
                 consistency with Progress OpenEdge.
               </li>
               <li>
-                🔐 Designed and built full auth systems in two projects: one with React/Next.js +
-                Node.js/NestJS, another with Angular + Progress OpenEdge. Both included login,
-                registration, email confirmation, password reset, and Mailgun email integration.
+                🔐 Designed and built full auth systems in 3 projects: one with React/Next.js +
+                Node.js/NestJS, another with Angular + Progress OpenEdge and one with React +
+                Python/Django. Both included login, registration, email confirmation, password
+                reset, and Mailgun email integration.
               </li>
               <li>
                 🖼️ Built a rich text editor dialog (Kolkov Angular) with image upload and embedding,

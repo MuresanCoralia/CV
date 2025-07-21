@@ -100,7 +100,6 @@
     animation: fadeSlideUp 1s ease forwards;
     opacity: 0;
     text-align: left;
-    padding: 0 2rem;
 
     h1 {
       font-size: 2rem;
@@ -159,5 +158,11 @@
         text-decoration: underline;
       }
     }
+  }
+}
+
+@media (max-width: 768px) {
+  .imageContainer {
+    padding: 1rem;
   }
 }

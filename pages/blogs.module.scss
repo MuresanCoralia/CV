@@ -103,9 +103,14 @@
     }
 
     pre {
+      overflow-x: auto;
       margin-bottom: 1rem;
+      -webkit-overflow-scrolling: touch;
 
       code {
+        white-space: pre;
+        min-width: max-content;
+        display: block;
         background-color: #e5e5e5;
         color: #0b4fa3;
       }
@@ -130,5 +135,11 @@
       max-width: 100%;
       height: auto;
     }
+  }
+}
+
+@media (max-width: 768px) {
+  .imageContainer {
+    padding: 1rem;
   }
 }

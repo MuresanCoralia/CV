@@ -1,7 +1,7 @@
 import Image from 'next/image';
-import styles from './hobies.module.scss';
+import styles from './hobbies.module.scss';
 
-export default function Hobies() {
+export default function Hobbies() {
   return (
     <main className={styles.hobiesContainer}>
       <div className={styles.hobieSection}>
@@ -17,7 +17,7 @@ export default function Hobies() {
         <div className={styles.overlayContent}>
           <h1>Hiking</h1>
           <p>
-            I love escaping to the mountains whenever I can. There's something incredibly grounding
+            I love escaping to the mountains whenever I can. There's something incredibly relaxing
             about being surrounded by nature — the fresh air, scenic views, and peaceful trails help
             me recharge and gain perspective.
           </p>
